@@ -12,7 +12,7 @@ export const OrderBy = () => {
       selectProps={{
         defaultValue: orderBy,
         onChange: (event) => {
-          push({ query: { ...query, orderBy: event.currentTarget.value } });
+          push({ query: { page: 1, orderBy: event.currentTarget.value } });
         },
       }}
       options={[

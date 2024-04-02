@@ -7,6 +7,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { useForm } from "react-hook-form";
 import { Avatar } from ".";
 
+
 function TestComponent() {
   const { register, setValue } = useForm<PutInput>();
   return BasicLayout(
@@ -24,12 +25,18 @@ test("「写真を変更する」ボタンがある", async () => {
 });
 
 test("画像のアップロードに成功した場合、画像の src 属性が変化する", async () => {
+  // アップロード成功時のモック
   mockUploadImage();
   render(<TestComponent />);
+  // 画像が表示されていないことを検証
   expect(screen.getByRole("img").getAttribute("src")).toBeFalsy();
   const { selectImage } = selectImageFile();
+  // 画像を選択する
   await selectImage();
+  
+  // リトライ用に用意された関数
   await waitFor(() =>
+    // 画像が表示されていることを検証
     expect(screen.getByRole("img").getAttribute("src")).toBeTruthy()
   );
 });

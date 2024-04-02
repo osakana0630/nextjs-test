@@ -12,9 +12,12 @@ import { LoginUser } from "./";
 const user = userEvent.setup();
 
 const setup = () => {
+  // location.reloadをmockして、テストに影響内容にしている
   mockWindowLocationReload();
   const { showToast } = mockUseToastAction();
   render(<LoginUser {...getMyProfileData} />);
+
+  // ログアウトボタンをクリックするインタラクションを関数化
   const clickLogout = async () => {
     const region = screen.getByRole("region", { name: "ログインユーザー" });
     await user.hover(region);
@@ -27,9 +30,13 @@ const setup = () => {
 test("ログアウトに成功すると、リロードされる", async () => {
   const mock = mockPostLogoutResolved();
   const { showToast, clickLogout } = setup();
+  // ログアウトボタンをクリック
   await clickLogout();
+  // postLogoutが呼ばれることを確認
   expect(mock).toHaveBeenCalled();
+  // 「ログアウトに失敗しました」というトーストが表示されないことを確認
   expect(showToast).not.toHaveBeenCalled();
+  // リロードされることを確認
   expect(window.location.reload).toHaveBeenCalled();
 });
 

@@ -20,6 +20,7 @@ export const useLikeButton = ({
   const postId = Number(parseAsPositiveInt(query.postId));
   const isDisabled =
     formState.isSubmitting || isLiked || isMyPost || !isLoggedIn;
+  
   const onSubmit = handleSubmit(async () => {
     try {
       await postLike({ postId });

@@ -26,3 +26,14 @@ test("選択した場合、query.orderBy が設定される", async () => {
     query: { orderBy: "starCount" },
   });
 });
+
+test("並び順を変更した際に、、1ページ目に遷移する", async () => {
+  const { combobox } = setup("/posts?page=2&orderBy=updatedAt");
+  // スター数順に変更
+  await user.selectOptions(combobox, "starCount");
+  // queryを確認して、1ページ目に遷移していることを検証
+  expect(mockRouter).toMatchObject({
+    pathname: "/posts",
+    query: { page: 1, orderBy: "starCount" },
+  });
+});

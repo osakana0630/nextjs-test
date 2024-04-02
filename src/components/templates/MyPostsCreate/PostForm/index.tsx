@@ -21,6 +21,15 @@ type Props<T extends FieldValues = PostInput> = {
   onInvalid?: SubmitErrorHandler<T>;
 };
 
+/**
+ * 責務
+ * - 入力フォームの提供
+ * - 入力内容のバリデーション
+ * - バリデーションエラーがあればエラー表示 ✅
+ * - 適正内容で送信された時、onValidを実行 ✅
+ * - 不適正内容で送信された時、onInValidを実行 ✅
+ */
+
 export const PostForm = (props: Props) => {
   const {
     register,

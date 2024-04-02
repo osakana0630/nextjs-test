@@ -19,5 +19,9 @@ test("未ログインの場合、ログインボタンが表示される", async
   expect(
     screen.getByRole("heading", { name: "Tech Posts" })
   ).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: "ログイン" })).toBeInTheDocument();
+  const loginButton = screen.getByRole("link", { name: "ログイン" });
+  expect(loginButton).toBeInTheDocument();
+
+  // LinkButtonに渡されるhref propが"/login"であることを確認
+  expect(loginButton).toHaveAttribute("href", "/login");
 });
