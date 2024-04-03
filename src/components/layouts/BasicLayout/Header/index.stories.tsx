@@ -18,7 +18,11 @@ export const NotLoggedIn: Story = {
   },
 };
 
-export const LoggedIn: Story = {};
+export const LoggedIn: Story = {
+  parameters: {
+    msw: { handlers: [handleGetMyProfile()] },
+  },
+};
 
 export const RouteMyPosts: Story = {
   parameters: {
