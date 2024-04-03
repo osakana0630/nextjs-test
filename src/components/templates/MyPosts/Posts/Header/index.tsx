@@ -22,7 +22,7 @@ export const Header = () => {
           defaultValue,
           onChange: (event) => {
             const status = event.target.value;
-            push({ query: { ...query, status } });
+            push({ query: { page: "1", status } });
           },
         }}
       />
